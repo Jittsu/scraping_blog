@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE_URL = 'https://www.nogizaka46.com/s/n46/diary/detail/'
-NEWEST_URL = f'{BASE_URL}56124?ima=4551&cd=MEMBER'
+NEWEST_URL = f'{BASE_URL}102969?ima=2202&cd=MEMBER'
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
 }
