@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE_URL = 'https://www.nogizaka46.com/s/n46/diary/detail/'
-NEWEST_URL = f'{BASE_URL}102848?ima=3554&cd=MEMBER'
+NEWEST_URL = f'{BASE_URL}56124?ima=4551&cd=MEMBER'
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
 }
@@ -109,7 +109,11 @@ def save_blog_text(html_content: str, save_dir: str) -> None:
     if not raw_text:
         return
 
-    text = '\n'.join(div.get_text() for div in raw_text.find_all('div'))
+    text = '\n'.join(div.get_text() for div in raw_text.find_all('div', dir='auto'))
+    if len(text) == 0:
+        text = '\n'.join(div.get_text() for div in raw_text.find_all('div'))
+    if len(text) == 0:
+        text = '\n'.join(div.get_text() for div in raw_text.find_all('p'))
     
     text_path = os.path.join(save_dir, 'blog.txt')
     with open(text_path, 'w', encoding='utf-8') as text_file:
