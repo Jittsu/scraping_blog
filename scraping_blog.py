@@ -113,7 +113,9 @@ def save_blog_text(html_content: str, save_dir: str) -> None:
     if len(text) == 0:
         text = '\n'.join(div.get_text() for div in raw_text.find_all('div'))
     if len(text) == 0:
-        text = '\n'.join(div.get_text() for div in raw_text.find_all('p'))
+        for br in raw_text.find_all('p')[0].find_all('br'):
+            br.replace_with('\n')
+        text = '\n'.join(p.get_text() for p in raw_text.find_all('p'))
     
     text_path = os.path.join(save_dir, 'blog.txt')
     with open(text_path, 'w', encoding='utf-8') as text_file:
